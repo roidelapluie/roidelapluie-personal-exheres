@@ -1,0 +1,19 @@
+# Copyright 2014 Julien Pivotto <roidelapluie@inuits.eu>
+# Distributed under the terms of the GNU General Public License v2
+
+require debian-upstream [ suffix=.tar.gz ]
+
+SUMMARY="nickle bindings for the cairo graphics library"
+HOMEPAGE="http://nickle.org/"
+
+LICENCES="LGPL MPL"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+build+run:
+    sys-apps/nickle
+    gnome-desktop/librsvg
+"
+

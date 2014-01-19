@@ -1,0 +1,53 @@
+# Copyright 2009-2013 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'libfprint-9999.ebuild' from Gentoo, which is:
+#     Copyright 1999-2006 Gentoo Foundation
+
+SCM_REPOSITORY="git://anongit.freedesktop.org/libfprint/${PN}"
+
+require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
+
+SUMMARY="Fprint library"
+DESCRIPTION="Library for fingerprint readers from Fprint project."
+HOMEPAGE="http://www.freedesktop.org/wiki/Software/fprint/${PN}"
+
+LICENCES="LGPL-2"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MY_FPRINT_DRIVERS="aes1610 aes1660 aes2501 aes2550 aes2660 aes4000 fdu2000
+                   upeke2 upeksonly upektc upekts uru4000 vcom5s vfs101 vfs301 vfs5011"
+MYOPTIONS="
+    debug
+    examples
+    x11_examples
+    fprint_drivers: ${MY_FPRINT_DRIVERS}
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/glib:2[>=2.28]
+        virtual/usb:1
+        dev-libs/nss
+        x11_examples? ( x11-libs/libXv )
+        fprint_drivers:aes4000? (
+            || ( x11-libs/gdk-pixbuf:2 media-gfx/ImageMagick )
+        )
+"
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/${PN}-VFS5011-driver.patch
+)
+
+src_configure() {
+    local with_drivers=()
+    for driver in ${MY_FPRINT_DRIVERS}; do
+        optionq fprint_drivers:${driver} && with_drivers+=( ${driver} )
+    done
+    local save_ifs="${IFS}"
+    IFS=","
+    with_drivers="${with_drivers[*]}"
+    IFS="${save_ifs}"
+    econf --with-drivers=${with_drivers} \
+        $(option_enable debug) \
+        $(option_enable examples examples-build) \
+        $(option_enable x11_examples x11-examples-build)
+}
