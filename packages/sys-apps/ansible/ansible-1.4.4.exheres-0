@@ -17,5 +17,8 @@ MYOPTIONS=""
 DEPENDENCIES="
 build+run:
     dev-lang/python:2.7
+run:
+   dev-python/PyYAML[python_abis:2.7]
+   dev-python/Jinja2[python_abis:2.7]
 "
 
