@@ -1,0 +1,21 @@
+# Copyright 2014 Julien Pivotto <roidelapluie@inuits.eu>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ suffix=tar.gz rev="v${PV}" ]
+#require python [ has_bin=true ]
+require setup-py [ import=distutils has_bin=true min_versions="2.7" blacklist="3" ]
+
+SUMMARY="IT automation tool"
+HOMEPAGE="http://docs.ansible.com/"
+WORK="${WORKBASE}/PYTHON_ABIS/2.7/${PNV}"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+build+run:
+    dev-lang/python:2.7
+"
+
