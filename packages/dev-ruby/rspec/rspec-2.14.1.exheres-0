@@ -1,0 +1,21 @@
+# Copyright 2014 Julien Pivotto <roidelapluie@inuits.eu>
+# Distributed under the terms of the GNU General Public License v2
+
+require gem
+
+SUMMARY="BDD for Ruby"
+HOMEPAGE="https://github.com/rspec"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+build+run:
+    dev-ruby/rspec-core[=$PV]
+    dev-ruby/rspec-expectations[=$PV]
+    dev-ruby/rspec-support
+    dev-ruby/rspec-mocks[=$PV]
+"
+

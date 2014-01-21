@@ -1,0 +1,18 @@
+# Copyright 2014 Julien Pivotto <roidelapluie@inuits.eu>
+# Distributed under the terms of the GNU General Public License v2
+
+require gem
+
+SUMMARY="RSpec tests for your Puppet manifests"
+HOMEPAGE="https://rspec-puppet.com"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+build+run:
+    dev-ruby/rspec
+"
+

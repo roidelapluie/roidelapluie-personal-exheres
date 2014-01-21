@@ -1,0 +1,28 @@
+# Copyright 2014 Julien Pivotto <roidelapluie@inuits.eu>
+# Distributed under the terms of the GNU General Public License v2
+
+
+require gem
+
+#MY_PNV=${PN}-3.0.0.beta1.gem"
+SUMMARY="BDD for Ruby"
+HOMEPAGE="https://github.com/rspec"
+
+MY_PNV="${PN}-3.0.0.beta1"
+GEM_FILENAME="${MY_PNV}.gem"
+
+
+REMOTE_IDS="rubyforge:${PN}"
+DOWNLOADS="http://gems.rubyforge.org/gems/${MY_PNV}.gem"
+
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+build+run:
+    dev-ruby/rspec-core
+"
+
