@@ -1,0 +1,23 @@
+# Copyright 2014 Julien Pivotto <roidelapluie@inuits.eu>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=belluzj suffix=tar.gz rev=${PV} ]
+
+SUMMARY="A font family with a great monospaced variant for programmers."
+DOWNLOADS="https://github.com/belluzj/fantasque-sans/releases/download/${PV}/CosmicSansNeueMono.zip"
+WORK="${WORKBASE}"
+
+LICENCES="OFL"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+src_install() {
+    default
+
+    insinto /usr/share/fonts/X11/${PN}/
+    doins "${WORK}"/*.ttf
+
+}

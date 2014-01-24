@@ -1,0 +1,20 @@
+# Copyright 2008 Fernando J. Pereda
+# Distributed under the terms of the GPLv2
+
+require sourceforge [ project="gitslave" suffix="tar.gz" ]
+
+SUMMARY="Coordinated multi-repository super-projects for Git "
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+
+DEPENDECIES="
+build+run:
+    dev-scm/git
+"
+
+src_prepare(){
+    edo sed -i '1s/\/usr\/local/\/usr/' Makefile
+}
+
