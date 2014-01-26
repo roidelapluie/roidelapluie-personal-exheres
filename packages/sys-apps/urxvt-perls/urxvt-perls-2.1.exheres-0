@@ -1,0 +1,24 @@
+# Copyright 2014 Julien Pivotto <roidelapluie@inuits.eu>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ suffix=tar.gz rev="${PV}" user="muennich" ]
+
+SUMMARY="Perl extensions for the rxvt-unicode terminal emulator"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+run:
+   x11-apps/rxvt-unicode[perl]
+"
+
+src_install(){
+    default
+
+    insinto /usr/lib64/urxvt/perl/
+    doins "${WORK}"/[a-z]*
+}
+
