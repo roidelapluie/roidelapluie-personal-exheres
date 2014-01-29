@@ -1,0 +1,28 @@
+# Copyright 2014 Julien Pivotto
+# Distributed under the terms of the GNU General Public License v2
+
+
+SCM_shFlags_REPOSITORY="https://github.com/nvie/shFlags.git"
+
+SCM_SECONDARY_REPOSITORIES="shFlags"
+
+
+SCM_EXTERNAL_REFS="shFlags:shFlags"
+
+require github [ user=nvie rev="${PV}" ]
+
+SUMMARY="Git extensions to provide high-level repository operations for Vincent Driessen's branching model."
+
+LICENCES="Apache-1.1"
+SLOT="0"
+PLATFORMS="~amd64 ~arm"
+MYOPTIONS=""
+
+
+DEPENDENCIES="
+"
+
+src_prepare(){
+    edo sed -i "/^prefix/s/\/usr\/local/${IMAGE//\//\\/}\/usr/" Makefile
+}
+
