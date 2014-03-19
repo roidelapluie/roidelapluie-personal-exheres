@@ -1,0 +1,17 @@
+# Copyright 2013 Benedikt Morbach <moben@exherbo.org>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi
+require setup-py [ import=setuptools has_bin=true ]
+
+SUMMARY="Declarative User Interfaces for Python"
+HOMEPAGE="https://github.com/nucleic/enaml"
+
+LICENCES="New BSD"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+"
+

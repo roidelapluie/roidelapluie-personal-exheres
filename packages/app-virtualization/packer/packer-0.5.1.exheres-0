@@ -1,0 +1,26 @@
+# Copyright 2014 Julien Pivotto
+# Distributed under the terms of the GNU General Public License v2
+
+
+require github [ user=mitchellh ]
+
+SUMMARY=""
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DOWNLOADS="https://dl.bintray.com/mitchellh/${PN}/${PV}_linux_amd64.zip"
+
+DEPENDENCIES="
+"
+
+WORK="${WORKBASE}"
+
+src_install(){
+    default
+
+    dobin "${WORK}"/packer*
+}
+
