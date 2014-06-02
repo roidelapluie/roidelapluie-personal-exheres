@@ -1,0 +1,58 @@
+# Copyright 2014 Julien Pivotto
+# Distributed under the terms of the GNU General Public License v2
+
+
+require github [ user=mitchellh ]
+
+SUMMARY="Vagrant is a tool for building and distributing working environments."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DOWNLOADS="https://dl.bintray.com/mitchellh/${PN}/${PNV/-/_}_x86_64.rpm"
+
+DEPENDENCIES="
+build:
+    app-arch/rpm
+    app-arch/rpm2targz
+"
+
+pkg_setup() {
+    exdirectory --allow /opt
+}
+
+rpm_unpack() {
+    echo "rpm2tar -O ${1} | tar -xf - --no-same-owner -C ${WORK}"
+    rpm2tar -O "${1}" | tar -xf - --no-same-owner -C "${WORK}"
+    assert "Unpacking RPM failed"
+}
+
+src_unpack(){
+    default
+
+    echo "Creating ${WORK}"
+    edo mkdir -p "${WORK}"
+
+    echo "Unpacking RPM files"
+
+    rpm_unpack "${FETCHEDDIR}/${PNV/-/_}_x86_64.rpm"
+}
+
+src_install(){
+    edo mv ${WORK}/opt ${IMAGE}
+    edo mv ${WORK}/usr ${IMAGE}
+    keepdir /opt/vagrant/embedded/lib/ruby/vendor_ruby/2.0.0/x86_64-linux
+    keepdir /opt/vagrant/embedded/lib/ruby/site_ruby/2.0.0/x86_64-linux
+    keepdir /opt/vagrant/embedded/ssl/private
+    keepdir /opt/vagrant/embedded/ssl/certs
+    keepdir /opt/vagrant/embedded/gems/doc
+    keepdir /opt/vagrant/embedded/lib/ruby/gems/2.0.0/doc
+    keepdir /opt/vagrant/embedded/lib/ruby/gems/2.0.0/cache
+    keepdir /opt/vagrant/embedded/lib/ruby/gems/2.0.0/build_info
+    keepdir /opt/vagrant/embedded/lib/ruby/2.0.0/racc/rdoc
+    keepdir /opt/vagrant/embedded/gems/build_info
+    keepdir /opt/vagrant/embedded/lib/ruby/2.0.0/racc/rdoc
+}
+

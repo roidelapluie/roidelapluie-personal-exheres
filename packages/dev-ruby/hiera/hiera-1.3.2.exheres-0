@@ -1,0 +1,18 @@
+# Copyright 2012 NAKAMURA Yoshitaka
+# Distributed under the terms of the GNU General Public License v2
+
+require gem
+
+SUMMARY="Lightweight Pluggable Hierarchical Database"
+HOMEPAGE+=" http://projects.puppetlabs.com/projects/hiera/"
+
+LICENCES="Apache-2.0"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-ruby/json_pure
+"
+
