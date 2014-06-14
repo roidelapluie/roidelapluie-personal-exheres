@@ -1,0 +1,29 @@
+# Copyright 2013 Thomas Witt
+# Distributed under the terms of the GNU General Public License v2
+
+require latex-beamer
+
+PLATFORMS="~amd64"
+
+
+src_compile(){
+echo OKOKO
+hg init .
+hg add *
+hg commit -m test -u 'John Doe <john@example.com>'
+
+cat << END > .hg/hgrc
+[extensions]
+keyword =
+[keyword]
+**.cls =
+**.tex =
+**.sty =
+[keywordmaps]
+Header = {root}/{file},v {node|short} {date|utcdate} {author|user}
+END
+hg kwexpand
+default
+
+}
+
