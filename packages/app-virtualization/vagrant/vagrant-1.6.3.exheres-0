@@ -54,6 +54,7 @@ src_install(){
     keepdir /opt/vagrant/embedded/lib/ruby/2.0.0/racc/rdoc
     keepdir /opt/vagrant/embedded/gems/build_info
     keepdir /opt/vagrant/embedded/lib/ruby/2.0.0/racc/rdoc
-    keepdir /opt/vagrant/embedded/gems/gems/nokogiri-1.6.1/ports/x86_64-redhat-linux/libxslt/1.1.26/lib/libxslt-plugins
+    keepdir /opt/vagrant/embedded/gems/gems/nokogiri-1.6.2.1/ports/x86_64-redhat-linux/libxslt/1.1.26/lib/libxslt-plugins
+    keepdir /opt/vagrant/embedded/gems/gems/nokogiri-1.6.2.1/ext/nokogiri/tmp
 }
 

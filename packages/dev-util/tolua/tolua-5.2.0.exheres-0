@@ -1,0 +1,28 @@
+# Copyright 2009-2014 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require lua [ whitelist="5.1 5.2" multibuild=false ]
+#require github [ user=LuaDist ]
+
+SUMMARY="toLua++ - binding C/C++ code to Lua"
+DESCRIPTION="
+tolua++ is an extended version of tolua, a tool to integrate C/C++ code
+with Lua. tolua++ includes new features oriented to c++ such as:
+
+    * Support for std::string as a basic type (this can be turned off by a command line option).
+    * Support for class templates
+
+As well as other features and bugfixes. 
+"
+MY_PN="${PN/pp/++}"
+MY_PNV="${MY_PN}-${PV}"
+HOMEPAGE="http://www.codenix.com/~tolua/"
+DOWNLOADS="http://x/${PNV}.tar.gz"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+UPSTREAM_DOCUMENTATION="${HOMEPAGE}/${MY_PNV}.html"
+

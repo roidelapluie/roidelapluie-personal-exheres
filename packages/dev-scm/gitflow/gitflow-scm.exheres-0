@@ -9,7 +9,7 @@ SCM_SECONDARY_REPOSITORIES="shFlags"
 
 SCM_EXTERNAL_REFS="shFlags:shFlags"
 
-require github [ user=nvie rev="${PV}" ]
+require github [ user=nvie tag="${PV}" ]
 
 SUMMARY="Git extensions to provide high-level repository operations for Vincent Driessen's branching model."
 

@@ -1,0 +1,129 @@
+# Copyright 2008 Richard Brown
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'conky-1.5.2_pre01116.ebuild' from Gentoo, which is:
+#     Copyright 1999-2008 Gentoo Foundation
+
+require sourceforge
+
+SUMMARY="A free, light-weight system monitor"
+DESCRIPTION="Conky has more than 250 built in objects, including support for:
+* a plethora of OS stats (uname, uptime, CPU usage, mem usage, disk usage, 'top' like process stats, and network monitoring, just to name a few)
+* built in IMAP and POP3 support
+* built in support for many popular music players (MPD, XMMS2, BMPx, Audacious)
+
+Conky can display this info either as text, or using simple progress bars and graph widgets, with different fonts and colours.
+"
+
+LICENCES="GPL-3 BSD-3 LGPL-2.1 MIT vim-syntax? ( vim )"
+
+REMOTE_IDS+=" freecode:conky"
+
+UPSTREAM_CHANGELOG="${HOMEPAGE}/changelog.html"
+UPSTREAM_DOCUMENTATION="${HOMEPAGE}/documentation.html"
+
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="debug lua truetype vim-syntax X
+    audacious [[ description = [ Enables support for the audacious audio player ] ]]
+    hddtemp [[ description = [ Enables support for the hddtemp daemon ] ]]
+    ibm [[ description = [ Enables support for ibm/lenovo notebooks ] ]]
+    imlib2 [[ description = [ Enable imlib2 support to display images ]
+              requires = X
+           ]]
+    lua-cairo [[ description = [ Cairo bindings for lua ] requires = [ X lua ] ]]
+    lua-imlib2 [[ description = [ Imlib2 Bindings for lua ] requires = [ imlib2 lua ] ]]
+    rss [[ description = [ Enables downloading and parsing of rss feeds ] ]]
+    truetype [[ requires = X ]]
+    weather-metar [[ description = [ Enables support for weather data from noaa.gov ] ]]
+    weather-xoap  [[ description = [ Enables support for weather data from xoap.weather.com ] ]]
+    wifi [[ description = [ Enables support for wireless tools ] ]]
+"
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+        X? (
+            x11-libs/libXt
+            x11-proto/xextproto
+            x11-proto/xproto
+        )
+    build+run:
+        audacious? ( media-sound/audacious )
+        hddtemp? ( hardware-monitoring/hddtemp )
+        lua? ( dev-lang/lua:5.1 )
+        rss? (
+            dev-libs/libxml2:2.0
+            net-misc/curl
+        )
+        weather-metar? ( net-misc/curl )
+        weather-xoap? (
+            dev-libs/libxml2:2.0
+            net-misc/curl
+        )
+        wifi? ( net-wireless/wireless_tools )
+        X? (
+            x11-libs/libICE
+            x11-libs/libSM
+            x11-libs/libX11
+            x11-libs/libXdamage
+            x11-libs/libXext
+            x11-libs/libXft
+            x11-libs/libXrender
+            imlib2? ( media-libs/imlib2[>=1.4.2][X] )
+            lua-cairo? (
+                dev-lang/toluapp[>=1.0.93]
+                x11-libs/cairo[X]
+            )
+            lua-imlib2? ( dev-lang/toluapp[>=1.0.93] )
+            truetype? (
+                media-libs/freetype:2
+                media-libs/fontconfig
+            )
+        )
+"
+
+src_configure() {
+    local myconf=()
+
+    if option X; then
+        myconf+=( $(option_enable truetype xft) )
+    else
+        myconf+=( --disable-xft )
+    fi
+    export CFLAGS="$CFLAGS -llua5.1"
+
+    econf \
+        "${myconf[@]}" \
+        --disable-bmpx \
+        --disable-moc \
+        --enable-mpd \
+        $(option_enable audacious) \
+        $(option_enable debug) \
+        $(option_enable hddtemp) \
+        $(option_enable ibm) \
+        $(option_enable imlib2) \
+        $(option_enable lua) \
+        $(option_enable lua-cairo) \
+        $(option_enable lua-imlib2) \
+        $(option_enable rss) \
+        $(option_enable X double-buffer) \
+        $(option_enable X own-window) \
+        $(option_enable X x11) \
+        $(option_enable X xdamage) \
+        $(option_enable weather-metar) \
+        $(option_enable weather-xoap) \
+        $(option_enable wifi wlan)
+}
+
+src_install() {
+    default
+
+    if option vim-syntax; then
+        insinto /usr/share/vim/vimfiles/ftdetect
+        doins "${WORK}"/extras/vim/ftdetect/conkyrc.vim
+
+        insinto /usr/share/vim/vimfiles/syntax
+        doins "${WORK}"/extras/vim/syntax/conkyrc.vim
+    fi
+}
+
