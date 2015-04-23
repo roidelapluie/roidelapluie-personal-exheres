@@ -1,0 +1,7 @@
+# Copyright 2014 John Kallimanis <johnkall007@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require eviacam
+
+PLATFORMS="~amd64"
+

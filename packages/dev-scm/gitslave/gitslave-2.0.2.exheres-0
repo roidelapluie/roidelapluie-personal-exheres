@@ -15,6 +15,6 @@ build+run:
 "
 
 src_prepare(){
-    edo sed -i '1s/\/usr\/local/\/usr/' Makefile
+    edo sed -i '1s@/usr/local@/usr/x86_64-pc-linux-gnu@' Makefile
 }
 

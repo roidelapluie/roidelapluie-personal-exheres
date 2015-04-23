@@ -43,18 +43,11 @@ src_unpack(){
 src_install(){
     edo mv ${WORK}/opt ${IMAGE}
     edo mv ${WORK}/usr ${IMAGE}
-    keepdir /opt/vagrant/embedded/lib/ruby/vendor_ruby/2.0.0/x86_64-linux
-    keepdir /opt/vagrant/embedded/lib/ruby/site_ruby/2.0.0/x86_64-linux
-    keepdir /opt/vagrant/embedded/ssl/private
-    keepdir /opt/vagrant/embedded/ssl/certs
-    keepdir /opt/vagrant/embedded/gems/doc
-    keepdir /opt/vagrant/embedded/lib/ruby/gems/2.0.0/doc
-    keepdir /opt/vagrant/embedded/lib/ruby/gems/2.0.0/cache
-    keepdir /opt/vagrant/embedded/lib/ruby/gems/2.0.0/build_info
-    keepdir /opt/vagrant/embedded/lib/ruby/2.0.0/racc/rdoc
-    keepdir /opt/vagrant/embedded/gems/build_info
-    keepdir /opt/vagrant/embedded/lib/ruby/2.0.0/racc/rdoc
-    keepdir /opt/vagrant/embedded/gems/gems/nokogiri-1.6.2.1/ports/x86_64-redhat-linux/libxslt/1.1.26/lib/libxslt-plugins
-    keepdir /opt/vagrant/embedded/gems/gems/nokogiri-1.6.2.1/ext/nokogiri/tmp
+    dodir /usr/x86_64-pc-linux-gnu/
+    edo mv ${IMAGE}/usr/bin ${IMAGE}/usr/x86_64-pc-linux-gnu/
+    for i in $(find ${IMAGE} -type d -empty)
+    do
+        edo touch "$i/.keep"
+    done
 }
 
